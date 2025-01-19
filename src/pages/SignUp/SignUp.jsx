@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import axios from 'axios'
-import { imageUpload } from '../../api/utils'
+import { imageUpload, saveUser } from '../../api/utils'
 
 const SignUp =() => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
@@ -29,6 +29,7 @@ const SignUp =() => {
         photoURL
       )
       console.log(result)
+      await saveUser({...result?.user,name,photoURL})
 
       navigate('/')
       toast.success('Signup Successful')
