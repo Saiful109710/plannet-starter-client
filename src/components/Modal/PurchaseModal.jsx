@@ -12,6 +12,10 @@ import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
 import useAxiosSecure from '../../hooks/useAxiosSecure'
 import { useNavigate } from 'react-router-dom'
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckoutForm from '../Form/CheckOutForm'
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
 
 const PurchaseModal = ({ closeModal, isOpen,plant ,refetch}) => {
 const {user} = useAuth()
@@ -161,10 +165,13 @@ const [totalQuantity,setTotalQuantity] = useState(1)
                    required
                    />
                 </div>
+                {/* checkout form */}
+                <Elements stripe={stripePromise}>
+                  {/* form component */}
+                  <CheckoutForm totalQuantity={totalQuantity} closeModal={closeModal} purchaseInfo={purchaseInfo} refetch={refetch}></CheckoutForm>
+                </Elements>
 
-                <div className='mt-3'>
-                <Button onClick={handlePurchase} label={`Pay ${totalPrice}$`}></Button>
-                </div>
+               
               </DialogPanel>
             </TransitionChild>
           </div>

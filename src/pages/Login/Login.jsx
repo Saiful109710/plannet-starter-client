@@ -36,8 +36,9 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      const {data} = await signInWithGoogle()
-        await saveUser(data?.user)
+      const data = await signInWithGoogle()
+      console.log(data)
+      await saveUser(data?.user)
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {

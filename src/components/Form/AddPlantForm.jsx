@@ -1,6 +1,8 @@
 import { TbFidgetSpinner } from "react-icons/tb";
+import { shortImageName } from "../../api/utils";
 
 const AddPlantForm = ({ handleSubmit, uploadBtnText, setUploadBtnText ,loading,setLoading}) => {
+  console.log(uploadBtnText)
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
       <form onSubmit={handleSubmit}>
@@ -98,7 +100,8 @@ const AddPlantForm = ({ handleSubmit, uploadBtnText, setUploadBtnText ,loading,s
                       hidden
                     />
                     <div className="bg-lime-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
-                      {uploadBtnText.name}
+                      {/* {uploadBtnText.name} */}
+                      {shortImageName(uploadBtnText)}
                     </div>
                   </label>
                 </div>
